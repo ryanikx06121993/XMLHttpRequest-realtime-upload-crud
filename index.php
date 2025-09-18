@@ -15,6 +15,12 @@
                 </form>
             </div>
         </div>
+
+
+        <!-- table content -->
+           <h2>Upload List</h2>
+             <div id="list"></div>
+
 </body>
 </html>
 <!-- serverside request -->

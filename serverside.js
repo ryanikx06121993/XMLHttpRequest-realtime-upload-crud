@@ -14,7 +14,22 @@ function tableDisplay() {
 
         if(this.status == 200) {
             // console.log(xhr);
-              console.log(JSON.parse(this.response));
+            const list = JSON.parse(this.responseText);
+              const container = document.getElementById("list");
+               container.innerHTML = "";
+
+
+               items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `
+          <strong>${item.name}</strong>
+          ${item.file_path ? `<img src="${item.file_path}">` : ""}
+          <button onclick="deleteItem(${item.id})">Delete</button>
+        `;
+        container.appendChild(div);
+      });
+    }
         }
 
   };
