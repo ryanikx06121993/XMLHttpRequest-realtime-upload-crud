@@ -19,7 +19,7 @@
 
         <!-- table content -->
            <h2>Upload List</h2>
-             <div id="list">RYANIKX</div>
+             <div id="list"></div>
 
 </body>
 </html>
