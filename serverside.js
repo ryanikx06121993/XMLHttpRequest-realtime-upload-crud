@@ -1,42 +1,48 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", (event) => {
-//   preventDefault();
- // function for display table of data 
-function tableDisplay() {
-  const xhr = new XMLHttpRequest();
-  
-  xhr.open("GET","./serverside.php?action=read", true); 
 
- xhr.onload = function() {
-
-      
-
-        if(this.status == 200) {
-            // console.log(xhr);
-            const list = JSON.parse(this.responseText);
-              const container = document.getElementById("list");
-               container.innerHTML = "";
+   // upload script post
+  //  form variable to take all data including upload in short forms submit all data fetch in serverside
+  const form = document.getElementById('uploadForm');
+   const inputFILE = document.getElementById("uploadFiles");
+   const btnSUBMIT = document.getElementById("btnSubmit");
 
 
-               items.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `
-          <strong>${item.name}</strong>
-          ${item.file_path ? `<img src="${item.file_path}">` : ""}
-          <button onclick="deleteItem(${item.id})">Delete</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-        }
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
 
-  };
-  xhr.send();
-  
- }
+      const formData = new FormData(form);
+      const xhr = new XMLHttpRequest();
+      // this function form is to check the files you upload 
+      //  inside serverside 
+      console.log(inputFILE.files);
 
-tableDisplay();
+      // javascript loop function for multiple file
+      for(const fileUPLOAD of inputFILE.files) {
+        formData.append("files[]", fileUPLOAD);
+      }
+        // prepararion for POST sending
+        xhr.open("POST","./serverside.php?action=upload", true); 
+        
+        // preparation for response from serverside both javascript and php
+        xhr.onload = function () {
+
+          console.log(xhr);
+
+        // if (xhr.status === 200) {
+        //   console.log(xhr.response);
+        //   // console.log('Upload success:', xhr.responseText);
+        //   //  this function for table realtime display after upload
+        //   // fetchUploads(); 
+        // } else {
+        //   console.error(xhr.response);
+        // }
+        
+        };
+
+      xhr.send(formData);
+   });
+
 
 });
