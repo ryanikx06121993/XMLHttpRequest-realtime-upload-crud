@@ -41,6 +41,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         
         };
 
+        xhr.onerror = function() {
+           console.log("An error occurred during the transaction");
+    };
+
       xhr.send(formData);
    });
 

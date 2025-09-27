@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 $host = "localhost";
 $db   = "upload";
 $user = "root";
